@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>跑马灯效果</title>
+	<script src="vue.js"></script>
+</head>
+<body>
+	<div id="app">
+		<input type="button" value="浪起来" v-on:click="lang">
+		<input type="button" value="低调" v-on:click="stop">
+		<h4>{{msg}}</h4>
+	</div>
+
+	<script>
+		var app=new Vue({
+			el:'#app',
+			data:{
+				msg:'猥琐发育，别浪~~~！',
+				timer:null
+			},
+			methods:{
+				lang(){
+					var _this=this;
+					if(_this.timer!=null) return;
+					_this.timer=setInterval(function(){
+						//获得字符串的第一个字符
+						var start=_this.msg.substring(0,1);
+						//获取后面的所有字符
+						var end=_this.msg.substring(1);
+						//第一个字符连接在所有字符后面
+						_this.msg=end+start;
+					},400)
+				},
+				stop(){
+					var _this=this;
+					clearInterval(_this.timer);
+					_this.timer=null;
+				}
+			}
+		})
+	</script>
+</body>
+</html>

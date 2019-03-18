@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="vue.js"></script>
+	<script src="vue-router.js"></script>
+</head>
+<body>
+	<div id="app">
+		<router-link to="/accout">Accout</router-link>
+
+		<router-view></router-view>
+	</div>
+
+	<template id="tmp1">
+	<div>
+		<h1>这是Accout组件</h1>
+		<router-link to="/accout/login">登录</router-link>
+		<router-link to="/accout/register">注册</router-link>
+
+		<router-view></router-view>
+	</div>
+	</template>
+
+	<script>
+		//创建组件模板对象
+		var accout={
+			template:'#tmp1'
+		}
+
+		var login={
+			template:'<h3>登录</h3>'
+		}
+
+		var register={
+			template:'<h3>注册</h3>'
+		}
+
+		var router=new VueRouter({
+			routes:[ //数组对象，有两个属性：path,component
+			{
+				path:'/accout',
+				component:accout,
+				//使用children属性实现子路由，同时，子路由的path前面,不要带/
+				children:[ 
+					{path:'login',component:login},
+					{path:'register',component:register}
+				]
+			}
+			]
+		})
+
+		var app=new Vue({
+			el:'#app',
+			data:{},
+			methods:{},
+			router
+		})
+	</script>
+</body>
+</html>

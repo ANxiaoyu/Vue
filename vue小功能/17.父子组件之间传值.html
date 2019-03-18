@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="vue.js"></script>
+</head>
+<body>
+	<div id="app">
+		<comp1 v-bind:parentmsg="msg" @func="getMsgFormson"></comp1>
+	</div>
+
+	<template id="tmp1">
+		<div>
+			<h1>这是子组件---{{parentmsg}}</h1>
+			<input type="button" value="向父组件传值" @click="sendMsg">
+		</div>
+	</template>
+
+	<script>
+		var comp1={
+			template:'#tmp1',
+			data(){
+				return{
+					msg:"做一个孝顺的孩子，baba这些钱你拿去挥霍吧！"
+				}
+				
+			},
+			methods:{
+				sendMsg(){
+					this.$emit('func',this.msg);
+				}
+			},
+			props:['parentmsg']  //父组件向子组件传值时，属性绑定，props
+		}
+
+
+		var app=new Vue({
+			el:'#app',
+			data:{
+				msg:"baba这里还有100元，my son,你想要不？",
+				msg1:''
+			},
+			methods:{
+				getMsgFormson(data){
+					this.msg1=data;
+				}
+			},
+			components:{
+				comp1
+			}
+		})
+	</script>
+</body>
+</html>
