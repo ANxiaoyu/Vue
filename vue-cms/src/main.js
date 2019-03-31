@@ -7,12 +7,15 @@ import router from './router'
 //导入vuex包
 import Vuex from 'vuex'
 Vue.use(Vuex) //注册vuex
+
+//每次刚进入网站，肯定会调用main.js在刚调用的时候，先从本地存储中，把购物车的数据读出来，放到store中
+var car=JSON.parse(localStorage.getItem('car')||'[]');
 //创建new Vuex.Store()实例
 var store=new Vuex.Store({
 	state:{
-		car:[//将购物车中是商品的数据，用一个数组存储起来，在car数组中，存储一些商品的对象，可以暂时将这个商品对象，设计成这个样子
+		car:car//将购物车中是商品的数据，用一个数组存储起来，在car数组中，存储一些商品的对象，可以暂时将这个商品对象，设计成这个样子
 		//{id:商品的id,count:要购买的数量,price:商品的单价,selected:false}
-		] 
+		
 
 	},
 	mutations:{ //this.$store.commit('方法的名称','按需传递唯一的参数')
@@ -32,6 +35,9 @@ var store=new Vuex.Store({
 			if(!flag){
 				state.car.push(goodsinfo);
 			}
+
+			//当更新car之后，把car数组，存储到本地localStorage中
+				localStorage.setItem('car',JSON.stringify(state.car));		
 		}
 	},
 	getters:{ //this.$store.getters.***
@@ -80,7 +86,7 @@ Vue.config.productionTip = false
 new Vue({
   el: '#app',
   router, //挂载路由对象到vm实例上
-  vuex,
+  store, //挂载store实例
   components: { App },
   template: '<App/>'
 })

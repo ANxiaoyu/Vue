@@ -16,22 +16,23 @@ export default{
 	
 	mounted(){
 		//初始化数字选择框组件
-		mui(".mui-numbox").goodsinfo_numbox();
+		mui(".mui-numbox").numbox();
 	},
 	methods:{
 		countChanged(){
 			//每当文本框的数据被修改的时候，立即把最新的数据。通过事件调用，传递给父组件
 			this.$emit("getcount",parseInt(this.$refs.goodsinfo_numbox.value));
-		},
-		props:["max"],
-		watch:{
+		}
+	},
+	props:["max"],
+	watch:{
 			//属性监听
 			'max':function(newVal,oldVal){
 				//使用JS API 设置numbox的最大值
-				mui(".mui-numbox").goodsinfo_numbox().setOption('max',newVal);
+				mui(".mui-numbox").numbox().setOption('max',newVal);
 			}
 		}
-	}
+	
 }
 </script>
 

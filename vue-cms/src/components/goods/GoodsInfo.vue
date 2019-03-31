@@ -111,7 +111,7 @@ export default{
 			//拼接出一个，要保存store中car数组里的商品信息对象
 			var goodsinfo={
 				id:this.id,
-				count:selectedCount,
+				count:this.selectedCount,
 				price:this.goodsinfo.sell_price,
 				selected:true};
 			//调用store中的mutations来将商品数据加入到car[]
@@ -127,12 +127,12 @@ export default{
 			//2.只要分辨率和测试的时候不一样，或者滚动条有一定的滚动距离之后，问题就出现了；
 			//3.因此，我们经过分析，得到结论：不能把位置的横纵坐标直接写死了，而是应该根据不同情况，动态计算这个坐标值；
 			//4.经过分析，得出解题思路：先得到徽标的横纵坐标，再得到小球的横纵坐标，然后让Y值求差，x值也求差，得到的结果，就是横纵坐标要位移的距离
-			//5.如何获取徽标和小球的位置？？ domObject.getBundingClientRect()
+			//5.如何获取徽标和小球的位置？？ domObject.getBoundingClientRect()
 
 			//获取小球的在页面中的位置
-			const ballPosition=this.$refs.ball.getBoundingCilentRect();
+			const ballPosition=this.$refs.ball.getBoundingClientRect();
 			//获取徽标在页面的位置
-			const badgePosition=document.getElementById("badge").getBoundingCilentRect();
+			const badgePosition=document.getElementById("badge").getBoundingClientRect();
 			const xDist=badgePosition.left-ballPosition.left;
 			const yDist=badgePosition.top-ballPosition.top;
 
