@@ -20,6 +20,7 @@ export default{
 	methods:{
 		countChanged(){
 		 //数量改变
+		 //每当数量值改变，则立即把最新的数量同步到 购物车的 store中，覆盖之前的数量值
 		 this.$store.commit("updateGoodsInfo",{
 		 	id:this.goodsid,
 		 	count:this.$refs.goodsinfo_numbox.value
